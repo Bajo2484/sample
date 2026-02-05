@@ -11,19 +11,29 @@
     <h3>Login to Your Account</h3>
     <p class="hint">Please enter your credentials to continue.</p>
 
-    <input type="text" placeholder="Username / Student ID" />
+    <form (ngSubmit)="login()">
+      <input
+        type="text"
+        placeholder="Username / Student ID"
+        [(ngModel)]="username"
+        name="username"
+      />
 
-    <div class="password-field">
-      <input type="password" placeholder="Password" />
-      <span class="eye"></span>
-    </div>
+      <div class="password-field">
+        <input
+          type="password"
+          placeholder="Password"
+          [(ngModel)]="password"
+          name="password"
+        />
+        <span class="eye"></span>
+      </div>
 
-   
-    <button (click)="login()">Login</button>
+      <button type="submit">Login</button>
+    </form>
 
     <div class="links">
       <a>Forgot Password?</a>
-      <a>Back to Home</a>
     </div>
 
   </div>

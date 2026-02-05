@@ -1,1 +1,84 @@
-<router-outlet></router-outlet>
+<ng-container *ngIf="isLoginRoute; else mainLayout">
+  <router-outlet></router-outlet>
+</ng-container>
+
+<ng-template #mainLayout>
+  <!-- Show admin layout when current user is admin; otherwise use student layout -->
+  <ng-container *ngIf="auth.isAdmin(); else studentLayout">
+    <div class="app-layout">
+      <aside class="sidebar">
+        <div class="logo-section">
+          <img src="/logo.jpg" alt="Application logo" />
+          <h2>Admin Panel</h2>
+          <p class="logo-subtitle">Online Voting System</p>
+        </div>
+
+        <nav class="nav-menu">
+          <ul class="menu">
+            <li
+              routerLink="/dashboard"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <span>Dashboard</span>
+            </li>
+            <li routerLink="/candidates" routerLinkActive="active">
+              <span>Candidates</span>
+            </li>
+            <li routerLink="/voters" routerLinkActive="active">
+              <span>Voters</span>
+            </li>
+            <!-- Admin should not access the student voting screen directly -->
+            <!-- <li routerLink="/elections" routerLinkActive="active">
+              <span>Elections</span>
+            </li> -->
+            <li routerLink="/results" routerLinkActive="active">
+              <span>Results</span>
+            </li>
+            <li routerLink="/organizations" routerLinkActive="active">
+              <span>Organizations</span>
+            </li>
+            <li routerLink="/setting" routerLinkActive="active">
+              <span>Settings</span>
+            </li>
+          </ul>
+        </nav>
+
+        <button class="logout" type="button" (click)="logout()">
+          Logout
+        </button>
+      </aside>
+
+      <main class="content">
+        <header class="content-header">
+          <h1 class="content-title">Admin Panel</h1>
+          <p class="content-subtitle">Manage elections, voters, and results.</p>
+        </header>
+
+        <section class="content-body">
+          <router-outlet></router-outlet>
+        </section>
+      </main>
+    </div>
+  </ng-container>
+
+  <ng-template #studentLayout>
+    <div class="app-layout student-layout">
+      <main class="content">
+        <header class="content-header">
+          <h1 class="content-title">Student Voting Portal</h1>
+          <p class="content-subtitle">Cast your vote securely and anonymously.</p>
+        </header>
+
+        <section class="content-body">
+          <!-- Students primarily access the elections page -->
+          <router-outlet></router-outlet>
+        </section>
+
+        <button class="logout" type="button" (click)="logout()">
+          Logout
+        </button>
+      </main>
+    </div>
+  </ng-template>
+</ng-template><router-outlet></router-outlet>
