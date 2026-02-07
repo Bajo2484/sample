@@ -1,0 +1,132 @@
+.page {
+  padding: 30px;
+  background: #f4f6f9;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.header p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.form-grid {
+  display: grid;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+input,
+select {
+  padding: 10px;
+  border: 1px solid #dcdcdc;
+  border-radius: 5px;
+  background: white;
+  font-size: 14px;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #2f80ed;
+  box-shadow: 0 0 0 2px rgba(47, 128, 237, 0.15);
+}
+
+small {
+  font-size: 12px;
+  color: #888;
+}
+
+.btn-area {
+  text-align: right;
+}
+
+button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button[type="submit"] {
+  background: #2f80ed;
+  color: white;
+}
+
+button:disabled {
+  background: #b0c7f5;
+  cursor: not-allowed;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+th {
+  background: #f9fafc;
+}
+
+select:invalid{
+  color: #888;
+}
+option[value=""]{
+  color: #888;
+}
+
+button {
+  margin-right: 5px;
+}
+
+button:last-child {
+  margin-right: 0;
+}
+
+/* Status */
+.pending {
+  background: #fff3cd;
+  color: #856404;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+/* Buttons */
+.approve {
+  background: #28a745;
+  color: white;
+  margin-right: 5px;
+}
+
+.reject {
+  background: #dc3545;
+  color: white;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+

@@ -1,0 +1,125 @@
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h2>Candidate Registration</h2>
+    <p>Register candidate and approve them for elections</p>
+  </div>
+
+  <!-- FORM CARD -->
+  <div class="card">
+    <form (ngSubmit)="registerCandidate()" class="form-grid">
+
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text"
+               placeholder="Enter candidate full name"
+               [(ngModel)]="fullName"
+               name="fullName"
+               required>
+      </div>
+
+      <!-- ORGANIZATION -->
+      <div class="form-group">
+        <label>Organization</label>
+        <select [(ngModel)]="course"
+                name="course"
+                (change)="onCourseChange()"
+                required>
+          <option value="" disabled selected hidden>Select organization</option>
+          <option *ngFor="let c of courses" [value]="c">
+            {{ c }}
+          </option>
+        </select>
+      </div>
+
+      <!-- POSITION (DYNAMIC) -->
+      <div class="form-group">
+        <label>Position</label>
+        <select [(ngModel)]="position"
+                name="position"
+                required>
+          <option value="" disabled selected hidden>Select position</option>
+          <option *ngFor="let p of positions" [value]="p">
+            {{ p }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Party / Team</label>
+        <input type="text"
+               placeholder="Enter party or team"
+               [(ngModel)]="party"
+               name="party">
+      </div>
+
+      <div class="form-group">
+        <label>Upload Photo</label>
+        <input type="file">
+        <small>JPG or PNG format. Max file size: 2MB</small>
+      </div>
+
+      <div class="btn-area">
+        <button type="submit"
+                [disabled]="!fullName || !position || !course">
+          {{ isEditMode ? 'Update Candidate' : 'Save Candidate' }}
+        </button>
+      </div>
+
+    </form>
+  </div>
+
+  <!-- TABLE CARD -->
+  <div class="card">
+    <h3>Candidate List</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Full Name</th>
+          <th>Position</th>
+          <th>Organization</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let c of candidateService.candidates$ | async">
+          <td>{{ c.fullName }}</td>
+          <td>{{ c.position }}</td>
+          <td>{{ c.organization }}</td>
+          <td>
+            <span [ngClass]="c.status">{{ c.status }}</span>
+          </td>
+          <td>
+
+            <button class="approve"
+                    *ngIf="c.status === 'pending'"
+                    (click)="candidateService.approveCandidate(c.id)">
+              Approve
+            </button>
+
+            <button class="reject"
+                    *ngIf="c.status === 'pending'"
+                    (click)="candidateService.rejectCandidate(c.id)">
+              Reject
+            </button>
+
+            <button (click)="editCandidate(c)">
+              Edit
+            </button>
+
+            <button class="reject"
+                    (click)="deleteCandidate(c.id)">
+              Delete
+            </button>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
