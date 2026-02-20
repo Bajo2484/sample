@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+<<<<<<< HEAD
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
@@ -101,4 +102,15 @@ export class Settings {
       `Theme: ${this.theme}, Language: ${this.language}, Notifications: ${this.notifications}`
     );
   }
+=======
+
+@Component({
+  selector: 'app-setting',
+  imports: [],
+  templateUrl: './setting.html',
+  styleUrl: './setting.css',
+})
+export class Setting {
+
+>>>>>>> 8ccb40de7f1159cb0de74a78380d18a8ca31a88a
 }

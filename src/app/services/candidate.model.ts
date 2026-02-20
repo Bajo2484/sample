@@ -8,6 +8,7 @@ export interface Candidate {
   // Position depends on organization
   position: string;
 
+<<<<<<< HEAD
   organization: string;
 
   partyName: string;   
@@ -20,3 +21,16 @@ export interface Candidate {
 
   status: CandidateStatus;
 }
+=======
+  // ATLAS, USG, STCM, AEMT
+  organization: string;
+
+  // Party / Team (optional text)
+  party: string;
+
+  // Optional photo if you add upload later
+  photoUrl?: string;
+
+  status: CandidateStatus;
+}
+>>>>>>> 8ccb40de7f1159cb0de74a78380d18a8ca31a88a

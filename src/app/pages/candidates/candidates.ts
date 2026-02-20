@@ -1,21 +1,33 @@
+<<<<<<< HEAD
 import { Component, HostListener } from '@angular/core';
+=======
+import { Component } from '@angular/core';
+>>>>>>> 8ccb40de7f1159cb0de74a78380d18a8ca31a88a
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CandidateService } from '../../services/candidate.service';
 import { Candidate } from '../../services/candidate.model';
+<<<<<<< HEAD
 import Swal from 'sweetalert2';
+=======
+>>>>>>> 8ccb40de7f1159cb0de74a78380d18a8ca31a88a
 
 @Component({
   selector: 'app-candidates',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './candidates.html',
+<<<<<<< HEAD
   styleUrls: ['./candidates.css']
+=======
+  styleUrl: './candidates.css',
+>>>>>>> 8ccb40de7f1159cb0de74a78380d18a8ca31a88a
 })
 export class CandidatesComponent {
 
   fullName = '';
   position = '';
+<<<<<<< HEAD
   course = '';
   partyName = '';
   platform = '';
@@ -32,6 +44,24 @@ export class CandidatesComponent {
     'PRESIDENT',
     'EXTERNAL VICE PRESIDENT',
     'INTERNAL VICE PRESIDENT',
+=======
+  course = ''; // organization
+  party = '';
+
+  editingId: string | null = null;
+  isEditMode = false;
+
+  // Organizations
+  courses: string[] = ['ATLAS', 'USG', 'STCM', 'AEMT'];
+
+  // Dynamic positions
+  positions: string[] = [];
+
+  atlasPositions: string[] = [
+    'PRESENT',
+    'EXTERNAL VICE PRESIDENT',
+    'INTERNAL VICE',
+>>>>>>> 8ccb40de7f1159cb0de74a78380d18a8ca31a88a
     'GENERAL SECRETARY',
     'ASSOCIATE SECRETARY',
     'AUDITOR',
@@ -39,8 +69,13 @@ export class CandidatesComponent {
     'EXTERNAL PRO',
     'INTERNAL PRO',
     '2ND GOV',
+<<<<<<< HEAD
     '3RD YR GOV',
     '4TH YR GOV'
+=======
+    '4TH YR GOV',
+    '3RD YR GOV'
+>>>>>>> 8ccb40de7f1159cb0de74a78380d18a8ca31a88a
   ];
 
   regularPositions: string[] = [
@@ -52,6 +87,7 @@ export class CandidatesComponent {
     'PRO'
   ];
 
+<<<<<<< HEAD
  
   photoPreview: string | ArrayBuffer | null = null;
   selectedFile: File | null = null;
@@ -167,11 +203,59 @@ export class CandidatesComponent {
     }
   }
 
+=======
+  constructor(public candidateService: CandidateService) {}
+
+  // When organization changes
+  onCourseChange() {
+    if (this.course === 'ATLAS') {
+      this.positions = this.atlasPositions;
+    } else if (
+      this.course === 'USG' ||
+      this.course === 'STCM' ||
+      this.course === 'AEMT'
+    ) {
+      this.positions = this.regularPositions;
+    } else {
+      this.positions = [];
+    }
+
+    this.position = '';
+  }
+
+  // ADD or UPDATE
+  registerCandidate() {
+    if (!this.fullName || !this.position || !this.course) {
+      alert('Please fill all required fields');
+      return;
+    }
+
+    const candidate: Candidate = {
+      id: this.editingId || Date.now().toString(),
+      fullName: this.fullName,
+      position: this.position,
+      organization: this.course,
+      party: this.party,
+      status: 'pending',
+    };
+
+    if (this.isEditMode) {
+      this.candidateService.updateCandidate(candidate);
+    } else {
+      this.candidateService.addCandidate(candidate);
+    }
+
+    this.resetForm();
+  }
+
+  // Edit
+>>>>>>> 8ccb40de7f1159cb0de74a78380d18a8ca31a88a
   editCandidate(c: Candidate) {
     this.fullName = c.fullName;
     this.course = c.organization;
     this.onCourseChange();
     this.position = c.position;
+<<<<<<< HEAD
     this.partyName = c.partyName || '';
     this.platform = c.platform || '';
     this.editingId = c.id;
@@ -216,10 +300,27 @@ export class CandidatesComponent {
   }
 
 
+=======
+    this.party = c.party;
+
+    this.editingId = c.id;
+    this.isEditMode = true;
+  }
+
+  // Delete
+  deleteCandidate(id: string) {
+    if (confirm('Delete this candidate?')) {
+      this.candidateService.deleteCandidate(id);
+    }
+  }
+
+  // Reset form
+>>>>>>> 8ccb40de7f1159cb0de74a78380d18a8ca31a88a
   resetForm() {
     this.fullName = '';
     this.position = '';
     this.course = '';
+<<<<<<< HEAD
     this.partyName = '';
     this.platform = '';
     this.positions = [];
@@ -227,5 +328,11 @@ export class CandidatesComponent {
     this.isEditMode = false;
     this.selectedFile = null;
     this.photoPreview = null;
+=======
+    this.party = '';
+    this.positions = [];
+    this.editingId = null;
+    this.isEditMode = false;
+>>>>>>> 8ccb40de7f1159cb0de74a78380d18a8ca31a88a
   }
 }

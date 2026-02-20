@@ -1,11 +1,22 @@
 import { Injectable } from '@angular/core';
 
+<<<<<<< HEAD
 export type UserRole = 'admin' | 'student' | 'elecom';
 
 export interface CurrentUser {
   role: UserRole;
   studentId?: string;       
   elecomUsername?: string; 
+=======
+export type UserRole = 'admin' | 'student';
+
+export interface CurrentUser {
+  role: UserRole;
+  /**
+   * Only set when the current user is a student.
+   */
+  studentId?: string;
+>>>>>>> 8ccb40de7f1159cb0de74a78380d18a8ca31a88a
 }
 
 @Injectable({
@@ -20,10 +31,21 @@ export class AuthService {
   }
 
   private loadFromStorage(): CurrentUser | undefined {
+<<<<<<< HEAD
     if (typeof localStorage === 'undefined') return undefined;
 
     const raw = localStorage.getItem(this.STORAGE_KEY);
     if (!raw) return undefined;
+=======
+    if (typeof localStorage === 'undefined') {
+      return undefined;
+    }
+
+    const raw = localStorage.getItem(this.STORAGE_KEY);
+    if (!raw) {
+      return undefined;
+    }
+>>>>>>> 8ccb40de7f1159cb0de74a78380d18a8ca31a88a
 
     try {
       return JSON.parse(raw) as CurrentUser;
@@ -33,7 +55,13 @@ export class AuthService {
   }
 
   private saveToStorage(user: CurrentUser | undefined): void {
+<<<<<<< HEAD
     if (typeof localStorage === 'undefined') return;
+=======
+    if (typeof localStorage === 'undefined') {
+      return;
+    }
+>>>>>>> 8ccb40de7f1159cb0de74a78380d18a8ca31a88a
 
     if (!user) {
       localStorage.removeItem(this.STORAGE_KEY);
@@ -57,7 +85,10 @@ export class AuthService {
     this.saveToStorage(undefined);
   }
 
+<<<<<<< HEAD
  
+=======
+>>>>>>> 8ccb40de7f1159cb0de74a78380d18a8ca31a88a
   isAdmin(): boolean {
     return this.currentUser?.role === 'admin';
   }
@@ -65,6 +96,7 @@ export class AuthService {
   isStudent(): boolean {
     return this.currentUser?.role === 'student';
   }
+<<<<<<< HEAD
 
   isElecom(): boolean {
     return this.currentUser?.role === 'elecom';
@@ -75,3 +107,7 @@ export class AuthService {
     return !!this.currentUser;
   }
 }
+=======
+}
+
+>>>>>>> 8ccb40de7f1159cb0de74a78380d18a8ca31a88a

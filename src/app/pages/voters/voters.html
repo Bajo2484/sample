@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="voters-container">
   <div class="page-header">
     <div>
@@ -89,4 +90,147 @@
       <button (click)="saveStudent()" class="btn-save">{{ isEditMode ? 'Update' : 'Save' }}</button>
     </div>
   </div>
+=======
+<div class="voters-page">
+  <h2 class="page-title">Voters</h2>
+
+  <section class="voters-layout">
+    <article class="voter-form-card">
+      <h3>Create Student Account</h3>
+      <p class="form-description">
+        Add student accounts here. Students will use their <strong>Student ID</strong> and
+        <strong>Password</strong> to log in and vote.
+      </p>
+
+      <form (ngSubmit)="addStudent()" class="voter-form">
+        <div class="form-row">
+          <label>
+            Student ID
+            <input
+              type="text"
+              [(ngModel)]="newStudent.id"
+              name="id"
+              required
+              placeholder="e.g. 2024-00123"
+            />
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label>
+            Full Name
+            <input
+              type="text"
+              [(ngModel)]="newStudent.name"
+              name="name"
+              required
+              placeholder="e.g. Juan Dela Cruz"
+            />
+          </label>
+        </div>
+
+        <div class="form-grid">
+          <label>
+            Course / Program
+            <input
+              type="text"
+              [(ngModel)]="newStudent.course"
+              name="course"
+              placeholder="e.g. BSIT"
+            />
+          </label>
+
+          <label>
+            Year Level
+            <input
+              type="text"
+              [(ngModel)]="newStudent.yearLevel"
+              name="yearLevel"
+              placeholder="e.g. 2nd Year"
+            />
+          </label>
+
+          <label>
+            Section
+            <input
+              type="text"
+              [(ngModel)]="newStudent.section"
+              name="section"
+              placeholder="e.g. A"
+            />
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label>
+            Password
+            <input
+              type="password"
+              [(ngModel)]="newStudent.password"
+              name="password"
+              required
+              placeholder="Temporary password"
+            />
+          </label>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit">Save Account</button>
+        </div>
+
+        <p *ngIf="errorMessage" class="message error">
+          {{ errorMessage }}
+        </p>
+        <p *ngIf="successMessage" class="message success">
+          {{ successMessage }}
+        </p>
+      </form>
+    </article>
+
+    <article class="voter-list-card">
+      <h3>Registered Students</h3>
+
+      <p *ngIf="!students.length" class="empty-state">
+        No student accounts yet. Start by adding a new student on the left.
+      </p>
+
+      <div *ngIf="students.length" class="table-wrapper">
+        <table class="voters-table">
+          <thead>
+            <tr>
+              <th>Student ID</th>
+              <th>Name</th>
+              <th>Course</th>
+              <th>Year</th>
+              <th>Section</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of students">
+              <td>{{ student.id }}</td>
+              <td>{{ student.name }}</td>
+              <td>{{ student.course || '—' }}</td>
+              <td>{{ student.yearLevel || '—' }}</td>
+              <td>{{ student.section || '—' }}</td>
+              <td>
+                <span
+                  class="status-pill"
+                  [class.voted]="student.hasVoted"
+                  [class.not-voted]="!student.hasVoted"
+                >
+                  {{ student.hasVoted ? 'Voted' : 'Not yet voted' }}
+                </span>
+              </td>
+              <td class="actions">
+                <button type="button" (click)="deleteStudent(student.id)">Remove</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
+  </section>
+>>>>>>> 8ccb40de7f1159cb0de74a78380d18a8ca31a88a
 </div>
