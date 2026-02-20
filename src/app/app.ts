@@ -1,6 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, TemplateRef } from '@angular/core';
 import { Router, RouterOutlet, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
-import { NgIf } from '@angular/common';
+import { NgIf, NgIfContext } from '@angular/common';
 import { AuthService } from './services/auth.service';
 
 @Component({
@@ -12,6 +12,8 @@ import { AuthService } from './services/auth.service';
 export class App {
   protected readonly title = signal('e-ballot');
   protected isLoginRoute = false;
+elecomLayout: TemplateRef<NgIfContext<boolean>> | null | undefined;
+studentLayout: TemplateRef<NgIfContext<boolean>> | null | undefined;
 
   constructor(
     private readonly router: Router,
