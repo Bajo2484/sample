@@ -74,12 +74,5 @@ export class StudentAccountService {
     );
   }
 
-  markVoted(id: string): void {
-    const current = this.getAll();
-    const index = current.findIndex(s => s.id === id);
-    if (index === -1) return;
-
-    current[index].hasVoted = true;
-    this.saveAll(current);
+ 
   }
-}

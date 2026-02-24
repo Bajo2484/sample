@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CandidateService } from '../../services/candidate.service';
@@ -13,15 +13,9 @@ import Swal from 'sweetalert2';
   styleUrls: ['./candidates.css'],
 })
 export class CandidatesComponent {
-studentId: any;
-email: any;
-registerVoter() {
-throw new Error('Method not implemented.');
-}
-
   fullName = '';
   position = '';
-  course = ''; // organization
+  course = ''; 
   partyName = '';
   platform = '';
   selectedFile: File | null = null;
@@ -62,6 +56,7 @@ throw new Error('Method not implemented.');
   ];
 
   constructor(public candidateService: CandidateService) {
+    // Load existing candidates from service (localStorage or backend)
     this.candidateService.loadCandidates();
   }
 
@@ -78,7 +73,7 @@ throw new Error('Method not implemented.');
     this.resetForm();
   }
 
-  /** Update positions based on selected course */
+  /** Update positions based on selected organization */
   onCourseChange() {
     if (this.course === 'ATLAS') {
       this.positions = [...this.atlasPositions];
@@ -118,23 +113,15 @@ throw new Error('Method not implemented.');
     const candidate: Candidate = {
       id,
       fullName: this.fullName,
-      position: this.position,
       organization: this.course,
+      position: this.position,
       partyName: this.partyName,
       platform: this.platform,
       status: 'pending',
-      photoUrl: ''
+      photoUrl: this.photoPreview as string || ''
     };
 
     try {
-      if (this.selectedFile) {
-        await this.candidateService.uploadPhoto(
-          this.selectedFile,
-          this.fullName.replace(/\s+/g, '_')
-        );
-        candidate.photoUrl = this.selectedFile.name;
-      }
-
       if (this.isEditMode) {
         this.candidateService.updateCandidate(id, candidate);
         Swal.fire({
@@ -144,7 +131,7 @@ throw new Error('Method not implemented.');
           confirmButtonColor: '#28a745'
         });
       } else {
-        await this.candidateService.addCandidate(candidate);
+        this.candidateService.addCandidate(candidate);
         Swal.fire({
           icon: 'success',
           title: 'Registered!',
@@ -200,7 +187,7 @@ throw new Error('Method not implemented.');
     });
 
     if (result.isConfirmed) {
-      await this.candidateService.deleteCandidate(id);
+      this.candidateService.deleteCandidate(id);
       Swal.fire({
         icon: 'success',
         title: 'Deleted!',

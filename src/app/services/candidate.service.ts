@@ -6,11 +6,6 @@ import { Candidate } from './candidate.model';
   providedIn: 'root',
 })
 export class CandidateService {
-approveCandidate(arg0: string) {
-throw new Error('Method not implemented.');
-}
-
- 
   async uploadPhoto(file: File, _fileName: string): Promise<string> {
     return new Promise<string>((resolve, reject) => {
       const reader = new FileReader();
@@ -86,15 +81,14 @@ throw new Error('Method not implemented.');
   }
 
  
-  approveCandidae(id: string) {
-    const all = this.getAllCandidates();
-    const c = all.find(c => c.id === id);
-    if (c) {
-      c.status = 'approved';
-      this.saveAll(all);
-    }
+ approveCandidate(id: string) {
+  const all = this.getAllCandidates();
+  const c = all.find(c => c.id === id);
+  if (c) {
+    c.status = 'approved';
+    this.saveAll(all);     
   }
-
+}
 
 
   rejectCandidate(id: string) {
