@@ -9,6 +9,7 @@
 
 .sidebar {
   width: 240px;
+  position:inherit;
   background: #1f3b57;
   color: #f9fafb;
   padding: 24px 20px;
